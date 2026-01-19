@@ -1,30 +1,47 @@
 resource "aws_s3_bucket" "static_site" {
-    bucket = var.bucket_name
+  bucket = var.bucket_name
 
-    tags = {
-        Name = "Terraform Static Website"
-        Environment = "Dev"
-    }
+  acl           = "public-read"
+  force_destroy = true
+
+  tags = {
+    Name        = "Terraform Static Website"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "allow_public" {
+  bucket = aws_s3_bucket.static_site.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
 
 resource "aws_s3_bucket_website_configuration" "website" {
-    bucket = aws_s3_bucket.static_site.id
-    index_document {
-      suffix = "index.html"
-    }
+  bucket = aws_s3_bucket.static_site.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
 }
 
 resource "aws_s3_bucket_policy" "public_policy" {
-    bucket = aws_s3_bucket.static_site.id
+  bucket = aws_s3_bucket.static_site.id
 
-    policy = jsonencode({
-        Version = "2012-10-17"
+  policy = jsonencode({
+    Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow"
+        Effect    = "Allow"
         Principal = "*"
-        Action = "s3:GetObject"
-        Resource = "${aws_s3_bucket.static_site.arn}/*"
+        Action    = "s3:GetObject"
+        Resource  = "${aws_s3_bucket.static_site.arn}/*"
       }
     ]
   })
