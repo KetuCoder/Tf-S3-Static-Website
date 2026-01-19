@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Terraform S3 Static Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --primary: #6c63ff;
+      --secondary: #00d4ff;
+      --bg-dark: #0f1220;
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --text-light: #f5f7ff;
+      --accent: #00ffa3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(
+          circle at top left,
+          var(--primary),
+          transparent 40%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          var(--secondary),
+          transparent 40%
+        ),
+        var(--bg-dark);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 3rem;
+      max-width: 520px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      animation: floatIn 1s ease-out;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    p {
+      text-align: center;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    ul {
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+    }
+
+    li {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    li:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    li::before {
+      content: "✔";
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🚀 <span>Deployment Successful!</span></h1>
+    <p>This static website is deployed using modern DevOps tooling:</p>
+
+    <ul>
+      <li>Terraform (Infrastructure as Code)</li>
+      <li>AWS S3 Static Website Hosting</li>
+      <li>GitHub Actions CI/CD</li>
+    </ul>
+
+    <footer>
+      Built with ❤️ & automated workflows
+    </footer>
+  </div>
+</body>
+</html>

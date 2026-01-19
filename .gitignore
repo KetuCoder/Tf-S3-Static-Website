@@ -1,0 +1,15 @@
+# Terraform core
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Sensitive variables
+*.tfvars
+*.tfvars.json
+
+# Environment secrets
+.env
+
+# AWS credentials
+.aws/
